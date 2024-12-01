@@ -1,20 +1,14 @@
 const { MongoClient } = require('mongodb');
 
+const uri = 'mongodb://localhost:27017';
+const client = new MongoClient(uri);
+
 const connectDB = async () => {
-  const uri = 'mongodb://localhost:27017/after_school_activities';
-  
   try {
-    const client = new MongoClient(uri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-
     await client.connect();
-    console.log("MongoDB Connected");
-
-    return client.db();
-  } catch (error) {
-    console.error(`Error connecting to database: ${error.message}`);
+    console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('Error connecting to database:', err);
     process.exit(1);
   }
 };

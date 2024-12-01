@@ -6,4 +6,8 @@ const app = express();
 const PORT = 5000;
 
 // Connect to MongoDB
-connectDB();
+connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  });
