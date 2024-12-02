@@ -13,4 +13,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Add a new lesson
+router.post('/', async (req, res) => {
+  try {
+    const db = await connectDB();
+    const lesson = req.body;
+    const result = await db.collection('lessons').insertOne(lesson);
+    res.status(201).json(result.ops[0]);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = router;
